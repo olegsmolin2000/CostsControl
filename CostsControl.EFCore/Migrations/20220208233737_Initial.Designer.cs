@@ -3,14 +3,16 @@ using System;
 using CostsControl.EFCore.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CostsControl.EFCore.Migrations
 {
     [DbContext(typeof(CostsControlDB))]
-    partial class CostsControlDBModelSnapshot : ModelSnapshot
+    [Migration("20220208233737_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
