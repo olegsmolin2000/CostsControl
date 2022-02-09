@@ -1,14 +1,10 @@
-﻿using System;
+﻿using CostsControl.EFCore.Entities.Base;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CostsControl.EFCore.Entities
 {
-    public class Product
+    public class Product:Entity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<Category> Categories { get; set; }
     }

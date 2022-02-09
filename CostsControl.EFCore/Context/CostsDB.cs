@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CostsControl.EFCore.Context
 {
-    public class CostsControlDB:DbContext
+    public class CostsDB:DbContext
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
@@ -14,7 +14,7 @@ namespace CostsControl.EFCore.Context
         {
             string connectionString = "server=localhost;database=TestDB;user=Oleg;password=Zhopa123456";
 
-            optionsBuilder.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
+            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
             base.OnConfiguring(optionsBuilder);
         }
