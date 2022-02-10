@@ -3,14 +3,16 @@ using System;
 using CostsControl.EFCore.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CostsControl.EFCore.Migrations
 {
     [DbContext(typeof(CostsDB))]
-    partial class CostsControlDBModelSnapshot : ModelSnapshot
+    [Migration("20220210023638_AddRequiredFields")]
+    partial class AddRequiredFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +96,7 @@ namespace CostsControl.EFCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AccountId")
+                    b.Property<int?>("AccountId")
                         .HasColumnType("int");
 
                     b.Property<int>("Amount")
@@ -103,7 +105,7 @@ namespace CostsControl.EFCore.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -143,15 +145,11 @@ namespace CostsControl.EFCore.Migrations
                 {
                     b.HasOne("CostsControl.EFCore.Entities.Account", "Account")
                         .WithMany("Transactions")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AccountId");
 
                     b.HasOne("CostsControl.EFCore.Entities.Product", "Product")
-                        .WithMany("Transactions")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Account");
 
@@ -159,11 +157,6 @@ namespace CostsControl.EFCore.Migrations
                 });
 
             modelBuilder.Entity("CostsControl.EFCore.Entities.Account", b =>
-                {
-                    b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("CostsControl.EFCore.Entities.Product", b =>
                 {
                     b.Navigation("Transactions");
                 });

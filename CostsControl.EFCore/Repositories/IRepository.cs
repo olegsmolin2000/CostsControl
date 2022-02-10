@@ -7,7 +7,7 @@ namespace CostsControl.EFCore.Repositories
 {
     public interface IRepository<T> where T: Entity, new()
     {
-        IQueryable<T> Items { get; }
+        IQueryable<T> ItemsInDataBase { get; }
         IQueryable<T> ItemsInMemory { get; }
 
         T Get(int id);

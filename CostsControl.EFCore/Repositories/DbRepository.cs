@@ -2,9 +2,7 @@
 using CostsControl.EFCore.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,8 +19,8 @@ namespace CostsControl.EFCore.Repositories
             _set = db.Set<TEntity>();
         }
 
-        public IQueryable<TEntity> Items => _set;
-        public IQueryable<TEntity> ItemsInMemory => (IQueryable<TEntity>)_set.Local;
+        public virtual IQueryable<TEntity> ItemsInDataBase => _set;
+        public virtual IQueryable<TEntity> ItemsInMemory => (IQueryable<TEntity>)_set.Local;
 
         public TEntity Add(TEntity entity)
         {
@@ -50,17 +48,17 @@ namespace CostsControl.EFCore.Repositories
 
         public TEntity Get(int id)
         {
-            return Items.SingleOrDefault(e => e.Id == id);
+            return ItemsInDataBase.SingleOrDefault(e => e.Id == id);
         }
 
         public async Task<TEntity> GetAsync(int id, CancellationToken Cancel = default)
         {
-            return await Items.SingleOrDefaultAsync(e => e.Id == id, Cancel).ConfigureAwait(false);
+            return await ItemsInDataBase.SingleOrDefaultAsync(e => e.Id == id, Cancel).ConfigureAwait(false);
         }
 
         public void Remove(int id)
         {
-            var entity = _set.Local.FirstOrDefault(e => e.Id == id) ?? new TEntity { Id = id };
+            var entity = ItemsInMemory.FirstOrDefault(e => e.Id == id) ?? new TEntity { Id = id };
 
             _db.Remove(entity);
 
@@ -69,7 +67,7 @@ namespace CostsControl.EFCore.Repositories
 
         public async Task RemoveAsync(int id, CancellationToken Cancel = default)
         {
-            var entity = _set.Local.FirstOrDefault(e => e.Id == id) ?? new TEntity { Id = id };
+            var entity = ItemsInMemory.FirstOrDefault(e => e.Id == id) ?? new TEntity { Id = id };
 
             _db.Remove(entity);
 
