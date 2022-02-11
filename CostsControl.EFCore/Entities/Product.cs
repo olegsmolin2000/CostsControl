@@ -8,7 +8,7 @@ namespace CostsControl.EFCore.Entities
     {
         [Required]
         public string Name { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
-        public IEnumerable<Transaction> Transactions { get; set; }
+        public HashSet<Category> Categories { get; set; }
+        public HashSet<Transaction> Transactions { get; set; }
     }
 }

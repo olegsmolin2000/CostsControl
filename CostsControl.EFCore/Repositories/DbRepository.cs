@@ -20,7 +20,7 @@ namespace CostsControl.EFCore.Repositories
         }
 
         public virtual IQueryable<TEntity> ItemsInDataBase => _set;
-        public virtual IQueryable<TEntity> ItemsInMemory => (IQueryable<TEntity>)_set.Local;
+        public virtual IQueryable<TEntity> ItemsInMemory => _set.Local.AsQueryable();
 
         public TEntity Add(TEntity entity)
         {

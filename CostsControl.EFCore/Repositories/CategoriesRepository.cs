@@ -12,10 +12,12 @@ namespace CostsControl.EFCore.Repositories
 
         public override IQueryable<Category> ItemsInDataBase => base.ItemsInDataBase
             .Include(category => category.ParentCategory)
+            .Include(category => category.Childs)
             .Include(category => category.Products);
 
         public override IQueryable<Category> ItemsInMemory => base.ItemsInMemory
             .Include(category => category.ParentCategory)
+            .Include(category => category.Childs)
             .Include(category => category.Products);
     }
 }
