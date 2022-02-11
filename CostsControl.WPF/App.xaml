@@ -1,0 +1,19 @@
+﻿<Application x:Class="CostsControl.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CostsControl.WPF"
+             xmlns:views="clr-namespace:CostsControl.WPF.View"
+             xmlns:viewmodels="clr-namespace:CostsControl.WPF.ViewModel"
+             xmlns:pagesViews="clr-namespace:CostsControl.WPF.View.Pages"
+             xmlns:pagesVM="clr-namespace:CostsControl.WPF.ViewModel.Pages"
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type pagesVM:MainPageViewModel}">
+            <pagesViews:MainPage />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type pagesVM:ProductsPageViewModel}">
+            <pagesViews:ProductsPage />
+        </DataTemplate>
+    </Application.Resources>
+</Application>
